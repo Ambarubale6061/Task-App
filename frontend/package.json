@@ -2,11 +2,11 @@
   "name": "scalable-frontend",
   "version": "1.0.0",
   "scripts": {
-    "build:css": "tailwindcss -i ./styles/input.css -o ./styles/tailwind.css --watch",
-    "dev": "concurrently \"npm run build:css\" \"next dev\"",
-    "build": "next build",
-    "start": "next start"
-  },
+  "dev": "concurrently \"npm run build:css\" \"next dev\"",
+  "build": "npm run build:css && next build",
+  "start": "next start",
+  "build:css": "tailwindcss -i ./styles/input.css -o ./styles/tailwind.css"
+},
   "dependencies": {
     "autoprefixer": "^10.4.21",
     "clsx": "^1.2.1",
