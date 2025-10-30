@@ -1,6 +1,3 @@
-// Author: Ambar Ubale
-// Professionally styled Register page with TailwindCSS
-
 import { useState } from "react";
 import { useRouter } from "next/router";
 

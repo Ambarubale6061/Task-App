@@ -1,4 +1,3 @@
-// Author: Ambar Ubale (Professional Enhanced Dashboard)
 import { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import { motion } from "framer-motion";
@@ -49,6 +48,7 @@ export default function Dashboard() {
         </div>
 
         {/* Stats Cards */}
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {[
             {
@@ -79,6 +79,7 @@ export default function Dashboard() {
         </div>
 
         {/* Chart Section */}
+
         <div className="mt-12 bg-white p-8 rounded-2xl shadow-lg">
           <h2 className="text-xl font-semibold mb-4 text-gray-800">
             Task Completion Overview

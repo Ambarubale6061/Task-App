@@ -34,7 +34,7 @@ export default function Tasks() {
     });
     if (!res.ok) return setMsg("Error creating task");
     const newTask = await res.json();
-    setTasks((prev) => [newTask, ...prev]); // 🔥 instantly add without reload
+    setTasks((prev) => [newTask, ...prev]);
     setForm({ title: "", description: "" });
   }
 

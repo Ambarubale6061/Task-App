@@ -1,4 +1,3 @@
-// Author: Ambar Ubale
 import { useEffect, useState } from "react";
 import Sidebar from "../../components/Sidebar";
 import { LogOut, Mail, Calendar } from "lucide-react";
@@ -28,6 +27,7 @@ export default function Profile() {
       <Sidebar />
       <main className="ml-64 flex-1 p-8">
         {/* Profile Header */}
+
         <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-2xl p-8 mb-8 shadow-lg">
           <h1 className="text-3xl font-bold">My Profile</h1>
           <p className="text-sm opacity-80">
@@ -36,16 +36,19 @@ export default function Profile() {
         </div>
 
         {/* Profile Card */}
+
         <div className="bg-white shadow-lg rounded-2xl p-8 border border-gray-100 hover:shadow-xl transition">
           {user ? (
             <>
               <div className="flex items-center gap-6">
                 {/* Avatar */}
+
                 <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center text-3xl font-bold text-blue-700 shadow-inner">
                   {user.name?.charAt(0).toUpperCase()}
                 </div>
 
                 {/* Info */}
+
                 <div>
                   <h2 className="text-2xl font-semibold text-gray-800">
                     {user.name}
@@ -67,9 +70,11 @@ export default function Profile() {
               </div>
 
               {/* Divider */}
+
               <hr className="my-6 border-gray-200" />
 
               {/* Account Summary */}
+
               <div className="grid md:grid-cols-3 gap-6">
                 <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-5 rounded-xl border border-blue-200 hover:shadow-md transition">
                   <p className="text-sm text-gray-500">Account Type</p>
@@ -88,6 +93,7 @@ export default function Profile() {
               </div>
 
               {/* Logout */}
+
               <div className="mt-10 flex justify-end">
                 <button
                   onClick={handleLogout}
