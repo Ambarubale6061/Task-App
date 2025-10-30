@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { apiFetch } from "../utils/api";
 
 export default function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -10,14 +11,11 @@ export default function Login() {
     e.preventDefault();
     setMsg("");
     try {
-      const res = await fetch(
-        process.env.NEXT_PUBLIC_API_URL + "/api/v1/auth/login",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(form),
-        }
-      );
+      const res = await fetch("/api/v1/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Error");
       localStorage.setItem("token", data.token);
