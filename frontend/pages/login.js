@@ -5,24 +5,26 @@ import { apiFetch } from "../utils/api";
 export default function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
   const [msg, setMsg] = useState("");
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   async function submit(e) {
     e.preventDefault();
     setMsg("");
+    setLoading(true);
     try {
-      const res = await fetch("/api/v1/auth/login", {
+      const data = await apiFetch("/api/v1/auth/login", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Error");
+
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
       router.push("/dashboard");
     } catch (err) {
       setMsg(err.message);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -30,7 +32,7 @@ export default function Login() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 px-4">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8 transform transition-all hover:scale-[1.01]">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
-          Wel-Come
+          Welcome Back 👋
         </h2>
         <form onSubmit={submit} className="space-y-5">
           <div>
@@ -60,10 +62,16 @@ export default function Login() {
           {msg && <p className="text-red-600 text-sm">{msg}</p>}
           <button
             type="submit"
-            className="w-full py-2.5 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition"
+            disabled={loading}
+            className="w-full py-2.5 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition disabled:opacity-50"
           >
-            Sign In
+            {loading ? "Loading..." : "Sign In"}
           </button>
+          {loading && (
+            <div className="flex justify-center mt-3">
+              <div className="w-8 h-8 border-4 border-indigo-300 border-t-indigo-600 rounded-full animate-spin"></div>
+            </div>
+          )}
         </form>
         <p className="mt-6 text-center text-sm text-gray-600">
           Don’t have an account?{" "}

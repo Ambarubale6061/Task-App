@@ -2,24 +2,29 @@
   "name": "scalable-frontend",
   "version": "1.0.0",
   "scripts": {
-  "dev": "concurrently \"npm run build:css\" \"next dev\"",
-  "build": "npm run build:css && next build",
-  "start": "next start",
-  "build:css": "tailwindcss -i ./styles/input.css -o ./styles/tailwind.css"
-},
+    "dev": "concurrently \"npm run build:css\" \"next dev\"",
+    "build": "npm run build:css && next build",
+    "start": "next start",
+    "build:css": "tailwindcss -i ./styles/input.css -o ./styles/tailwind.css"
+  },
   "dependencies": {
+    "@tanstack/react-query": "^5.90.12",
     "autoprefixer": "^10.4.21",
     "clsx": "^1.2.1",
     "concurrently": "^9.2.1",
-    "framer-motion": "^12.23.24",
+    "framer-motion": "^12.23.26",
     "lucide-react": "^0.548.0",
     "next": "13.4.7",
     "next-themes": "^0.4.6",
     "postcss": "^8.5.6",
-    "react": "18.2.0",
+    "quill": "^2.0.3",
+    "react": "^18.2.0",
     "react-dom": "18.2.0",
     "react-hot-toast": "^2.6.0",
-    "recharts": "^3.3.0"
+    "react-quill": "^2.0.0",
+    "recharts": "^3.3.0",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1"
   },
   "devDependencies": {
     "tailwindcss": "^3.4.18"

@@ -5,27 +5,26 @@ import { apiFetch } from "../utils/api";
 export default function Register() {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
   const [msg, setMsg] = useState("");
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   async function submit(e) {
     e.preventDefault();
     setMsg("");
+    setLoading(true);
     try {
-      const res = await fetch(
-        process.env.NEXT_PUBLIC_API_URL + "/api/v1/auth/register",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(form),
-        }
-      );
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Error");
+      const data = await apiFetch("/api/v1/auth/register", {
+        method: "POST",
+        body: JSON.stringify(form),
+      });
+
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
       router.push("/dashboard");
     } catch (err) {
       setMsg(err.message);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -75,10 +74,16 @@ export default function Register() {
           {msg && <p className="text-red-600 text-sm">{msg}</p>}
           <button
             type="submit"
-            className="w-full py-2.5 bg-pink-600 text-white font-semibold rounded-lg hover:bg-pink-700 transition"
+            disabled={loading}
+            className="w-full py-2.5 bg-pink-600 text-white font-semibold rounded-lg hover:bg-pink-700 transition disabled:opacity-50"
           >
-            Sign Up
+            {loading ? "Loading..." : "Sign Up"}
           </button>
+          {loading && (
+            <div className="flex justify-center mt-3">
+              <div className="w-8 h-8 border-4 border-pink-300 border-t-pink-600 rounded-full animate-spin"></div>
+            </div>
+          )}
         </form>
         <p className="mt-6 text-center text-sm text-gray-600">
           Already have an account?{" "}
